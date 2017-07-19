@@ -23,6 +23,10 @@ public class Chapter4 {
             List<Person> people = peopleList.blockingGet();
             return Observable.fromIterable(query(""));
         }
+
+        public Observable<Person> listPeople2() {
+            return Observable.defer(() -> Observable.fromIterable(query("")));
+        }
     }
 
     private List<Person> query(String sql) {
