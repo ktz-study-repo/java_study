@@ -1,4 +1,4 @@
-package org.example.ktz.rxjava.chap5;
+package org.example.ktz.rxjava.chap5.netty;
 
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandler.Sharable;

@@ -1,4 +1,4 @@
-package org.example.ktz.rxjava.chap5;
+package org.example.ktz.rxjava.chap5.single;
 
 import java.io.BufferedReader;
 import java.io.IOException;

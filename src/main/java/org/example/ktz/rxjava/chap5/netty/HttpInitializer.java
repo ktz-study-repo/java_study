@@ -1,4 +1,4 @@
-package org.example.ktz.rxjava.chap5;
+package org.example.ktz.rxjava.chap5.netty;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
