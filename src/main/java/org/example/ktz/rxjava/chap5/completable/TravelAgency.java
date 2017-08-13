@@ -36,3 +36,15 @@ class SomeTravelAsyncAgency extends SomeTravelAgency implements TravelAgencyAsyn
 		return CompletableFuture.supplyAsync(() -> search(user, location));
 	}
 }
+
+interface TravelAgencyRx extends TravelAgencyAsync {
+	Observable<Flight> searchRx(User user, GeoLocation location);
+}
+
+class SomeTravelRxAgency extends SomeTravelAsyncAgency implements TravelAgencyRx {
+
+	@Override
+	public Observable<Flight> searchRx(User user, GeoLocation location) {
+		return Util.observe(searchAsync(user, location));
+	}
+}

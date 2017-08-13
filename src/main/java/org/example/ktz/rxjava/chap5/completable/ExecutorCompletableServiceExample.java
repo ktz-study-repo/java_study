@@ -1,5 +1,7 @@
 package org.example.ktz.rxjava.chap5.completable;
 
+import rx.Observable;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.*;
@@ -45,5 +47,21 @@ public class ExecutorCompletableServiceExample {
                 .thenCompose(Function.identity())       // Flatten 같은 역할을 하고 있다.
                 .thenCompose(flight -> asyncService.bookAsync(flight));
 
+    }
+
+    static TravelRxService rxService = new TravelRxService();
+
+    public static void rxMain(String[] args) {
+        Observable<TravelAgencyRx> agencies = Observable.from(Collections.singletonList(new SomeTravelRxAgency()));
+        Observable<User> user = rxService.findByIdRx(0);
+        Observable<GeoLocation> location = rxService.locateRx();
+
+        user.zipWith(location, (User us, GeoLocation loc) ->
+            agencies
+                    .flatMap(agency -> agency.searchRx(us, loc))
+                    .first()
+        )
+        .flatMap(x -> x)
+        .flatMap(rxService::bookRx);
     }
 }
