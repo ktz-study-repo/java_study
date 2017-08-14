@@ -1,5 +1,6 @@
 package org.ktz.example.rxjava;
 
+import org.example.ktz.rxjava.chap5.netty.HttpTcpNettyServer;
 import org.example.ktz.rxjava.chap5.rxnetty.SingleThreadToRxNetty;
 import org.example.ktz.rxjava.chap5.single.SingleThread;
 import org.junit.Test;
@@ -13,6 +14,14 @@ public class Chapter5 {
     public void SingleThreadServer() throws IOException {
         // Thread 한개만 갖고 시작을 해보자
         SingleThread.main(empty);
+    }
+
+    @Test
+    public void NettyServer() throws Exception {
+        // Netty는 이렇게 할 수 있다.
+        HttpTcpNettyServer httpTcpNettyServer = new HttpTcpNettyServer();
+
+        httpTcpNettyServer.main(empty);
     }
 
     @Test
