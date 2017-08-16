@@ -1,4 +1,4 @@
-package org.example.ktz.rxjava.chap5.single;
+package org.example.ktz.rxjava.chap5.httpserver.single;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,7 +34,7 @@ public class SingleThread {
                 System.out.println("n: " + n);
                 if(n % 2 != 0) {
                     System.out.println("Sleep 5 sec");
-                    Thread.sleep(5000);
+                    Thread.sleep(5000);     // 만약 어떠한 IO 로 인하여 blocking이 된다면, 다음 것은 받을 수가 없다.
                 }
                 n += 1;
             }

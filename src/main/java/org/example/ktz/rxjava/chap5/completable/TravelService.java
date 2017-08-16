@@ -9,6 +9,7 @@ public class TravelService {
     public User findById(long userId) {
         try {
             Thread.sleep(1000);
+            System.out.println("Find Id: " + userId);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -19,6 +20,7 @@ public class TravelService {
     GeoLocation locate() {
         try {
             Thread.sleep(1000);
+            System.out.println("Locate");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -29,6 +31,7 @@ public class TravelService {
     Ticket book(Flight flight)  {
         try {
             Thread.sleep(1000);
+            System.out.println("book: " + flight);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

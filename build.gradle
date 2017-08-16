@@ -13,6 +13,11 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'org.twitter4j', name: 'twitter4j-stream', version: '4.0.2'
     compile "io.reactivex.rxjava2:rxjava:2.1.0"
+
+    /**
+     * 추가적으로 추가!
+     */
     compile group: 'io.netty', name: 'netty-all', version: '4.1.14.Final'
     compile 'io.reactivex:rxnetty-http:0.5.2'
+    compile group: 'com.ning', name: 'async-http-client', version: '1.9.40'
 }

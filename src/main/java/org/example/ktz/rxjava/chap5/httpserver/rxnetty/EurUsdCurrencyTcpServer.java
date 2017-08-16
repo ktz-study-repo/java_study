@@ -1,4 +1,4 @@
-package org.example.ktz.rxjava.chap5.rxnetty;
+package org.example.ktz.rxjava.chap5.httpserver.rxnetty;
 
 import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;

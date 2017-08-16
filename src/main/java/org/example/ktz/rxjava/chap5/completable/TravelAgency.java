@@ -15,6 +15,7 @@ class SomeTravelAgency implements TravelAgency {
 	public Flight search(User user, GeoLocation location) {
 		try {
 			Thread.sleep(1000);
+			System.out.println("search User: " + user + " location: " + location );
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
