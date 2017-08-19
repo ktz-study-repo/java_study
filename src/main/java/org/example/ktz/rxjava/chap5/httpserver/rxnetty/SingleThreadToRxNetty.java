@@ -25,8 +25,6 @@ public class SingleThreadToRxNetty {
                     "\r\n" +
                     "OK");
 
-    private static int n = 0;
-
 
     public static void main(String[] args) throws IOException {
         TcpServer
@@ -36,11 +34,11 @@ public class SingleThreadToRxNetty {
                     pipeline.addLast(new StringDecoder(UTF_8));
                 })
                 .start(connection -> {
-
                     Observable<String> output = connection
                             .getInput()     // getInput이 Observable<T> 상속을 갖는 ContentSource<T>를 리턴.
                                             // 이것이 Input을 Observable<String>로 감싸서 받는다.
                             .flatMap(line -> {      // 이제 Rx 시작!
+
                                 if (line.isEmpty())
                                     return RESPONSE;
                                 else

@@ -16,6 +16,8 @@ import static com.sun.xml.internal.stream.writers.WriterUtility.UTF_8;
 
 public class HttpTcpNettyServer {
 
+    private static int n = 0;
+
     /**
      *
      * Single Thread -> 비동기
@@ -62,6 +64,18 @@ public class HttpTcpNettyServer {
 
         //  Response 부분
         private void sendResponse(ChannelHandlerContext ctx) throws UnsupportedEncodingException {
+
+            n += 1;
+
+            if(n % 2 != 0) {
+                System.out.println("Sleep 5 sec");
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
             final DefaultFullHttpResponse response =
                     new DefaultFullHttpResponse(
                             HttpVersion.HTTP_1_1,
