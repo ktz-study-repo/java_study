@@ -4,6 +4,7 @@ import org.junit.Test;
 import rx.Observable;
 
 import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Chapter6 {
@@ -118,5 +119,80 @@ public class Chapter6 {
                 .range(1, 7)
                 .buffer(1, 2)   // [1],2,3,4,5,6,7 -> 1,2,[3],4,5,6,7 이런식으로 Sliding
                 .subscribe((List<Integer> list) -> System.out.println(list));
+    }
+
+    @Test
+    public void TimeBuffering() {
+        Observable<String> names = Observable.just(
+                "A",
+                "B",
+                "C",
+                "D",
+                "E",
+                "F",
+                "G");
+
+        Observable<Long> absoluteDelayMillis = Observable.just(
+                0.1,
+                0.6,
+                0.9,
+                1.1,
+                3.3,
+                3.4,
+                3.5,
+                3.6,
+                4.4,
+                4.8
+        ).map(d -> (long)(d * 1_000));
+
+        Observable<String> delayedNames = names.zipWith(absoluteDelayMillis,(n, d) ->
+                Observable.just(n).delay(d, TimeUnit.MILLISECONDS))
+                .flatMap(o -> o);
+
+        delayedNames
+                .buffer(1, TimeUnit.SECONDS)
+                .subscribe(System.out::println);
+
+        delayedNames.toBlocking().last();
+    }
+
+    // Buffer는 Buffer를 만들때마다 새로운 List를 생성한다.
+    // 이것은 메모리 누수를 만들 수 있다.
+    // 그래서 Window를 사용하보자.
+
+    @Test
+    public void TimeWindow() {
+        Observable<String> names = Observable.just(
+                "A",
+                "B",
+                "C",
+                "D",
+                "E",
+                "F",
+                "G");
+
+        Observable<Long> absoluteDelayMillis = Observable.just(
+                0.1,
+                0.6,
+                0.9,
+                1.1,
+                3.3,
+                3.4,
+                3.5,
+                3.6,
+                4.4,
+                4.8
+        ).map(d -> (long)(d * 1_000));
+
+        Observable<String> delayedNames = names.zipWith(absoluteDelayMillis,(n, d) ->
+                Observable.just(n).delay(d, TimeUnit.MILLISECONDS))
+                .flatMap(o -> o);
+
+        delayedNames
+                .window(1, TimeUnit.SECONDS)    // 여기서 나오는 것을 Observable<Observable<String>>이다.
+                                                         // 그 이유는, 버퍼를 stream형태로 받아서, 자원 낭비를 줄이기 위해!.
+                .subscribe(System.out::println);
+
+        delayedNames.toBlocking().last();
     }
 }
