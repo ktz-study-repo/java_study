@@ -8,6 +8,7 @@ class Solution {
 
         Stack<Character> brackets = new Stack<>();
 
+        // n
         for(int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             if(isOpened(c)) {
@@ -31,6 +32,7 @@ class Solution {
 
     private boolean isValid(String s) {
         if(s.length() % 2 != 0) return false;
+
         if(!s.isEmpty()) {
             return isOpened(s.charAt(0)) && !isOpened(s.charAt(s.length() - 1));
         } else {
